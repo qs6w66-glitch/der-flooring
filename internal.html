@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="德尔地板 · 五大系列 · ENF级环保 · 瑞士原创设计 · 保修2年 · 买贵退差价">
+<title>德尔地板 · 内部版</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#000;--card:#1c1c1e;--card2:#2c2c2e;
+  --text:#f5f5f7;--text-sub:#a1a1a6;--text-faint:#48484a;
+  --accent:#c9a47a;--accent2:#e0c9a6;--accent-dim:rgba(201,164,122,0.12);
+  --green:#30d158;--line:rgba(255,255,255,0.06);--line2:rgba(255,255,255,0.1);
+  --r:14px;--r-lg:24px;--nav-h:44px;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.47;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* Wood Textures */
+.w-tiangong{background:linear-gradient(170deg,rgba(201,164,122,0.08) 0%,transparent 50%),linear-gradient(160deg,#2a2218,#1a1510 50%,#2e2519),repeating-linear-gradient(91deg,transparent,transparent 5px,rgba(212,184,150,0.04) 5px,rgba(212,184,150,0.04) 6px)}
+.w-honey{background:linear-gradient(170deg,rgba(201,164,122,0.1) 0%,transparent 50%),linear-gradient(160deg,#322014,#241710 50%,#36241a),repeating-linear-gradient(92deg,transparent,transparent 4px,rgba(201,164,122,0.05) 4px,rgba(201,164,122,0.05) 5px)}
+.w-grey{background:linear-gradient(170deg,rgba(255,255,255,0.04) 0%,transparent 50%),linear-gradient(160deg,#1c1c1e,#131316 50%,#222226),repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,0.025) 3px,rgba(255,255,255,0.025) 4px)}
+.w-dark{background:linear-gradient(170deg,rgba(168,123,79,0.08) 0%,transparent 50%),linear-gradient(160deg,#1c1410,#0e0a06 50%,#221810),repeating-linear-gradient(92deg,transparent,transparent 3px,rgba(168,123,79,0.05) 3px,rgba(168,123,79,0.05) 4px)}
+.w-natural{background:linear-gradient(170deg,rgba(201,164,122,0.06) 0%,transparent 50%),linear-gradient(160deg,#28201a,#181410 50%,#2c2419),repeating-linear-gradient(91deg,transparent,transparent 5px,rgba(201,164,122,0.04) 5px,rgba(201,164,122,0.04) 6px)}
+.w-hero{background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(201,164,122,0.15),transparent 70%),linear-gradient(180deg,#1a1410 0%,#0a0806 50%,#000 100%),repeating-linear-gradient(90deg,transparent,transparent 8px,rgba(201,164,122,0.03) 8px,rgba(201,164,122,0.03) 9px)}
+
+/* Nav */
+.nav-bar{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(0,0,0,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid var(--line);z-index:1000;display:flex;align-items:center;justify-content:center;padding:0 72px 0 16px}
+.nav-scroll{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-item{flex-shrink:0;padding:6px 14px;font-size:13px;font-weight:500;color:var(--text-sub);border:none;background:none;border-radius:980px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;font-family:inherit}
+.nav-item.active{background:var(--text);color:#000}
+
+/* Layout */
+.page-wrap{padding-top:var(--nav-h);min-height:100vh;padding-bottom:70px}
+.section{display:none;animation:fadeUp .6s cubic-bezier(.4,0,.2,1)}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Hero */
+.hero{min-height:calc(100vh - var(--nav-h));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,164,122,0.18),transparent 65%);top:25%;left:50%;transform:translateX(-50%);filter:blur(20px);pointer-events:none}
+.hero .brand{font-size:12px;font-weight:600;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeIn 1s .3s forwards}
+.hero h1{font-size:48px;font-weight:700;letter-spacing:-2px;line-height:1.02;margin-bottom:14px;opacity:0;animation:fadeIn 1s .5s forwards;background:linear-gradient(180deg,#f5f5f7 30%,#8a8a8e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{font-size:17px;color:var(--text-sub);max-width:320px;margin:0 auto;line-height:1.45;opacity:0;animation:fadeIn 1s .7s forwards}
+.hero .meta{margin-top:36px;display:flex;gap:24px;opacity:0;animation:fadeIn 1s .9s forwards}
+.hero .meta-item{text-align:center}
+.hero .meta-num{font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-1px}
+.hero .meta-label{font-size:11px;color:var(--text-faint);margin-top:2px;letter-spacing:1px}
+.hero .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--text-faint);opacity:0;animation:fadeIn 1s 1.2s forwards,bounce 2s 1.2s infinite}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* Section Header */
+.sec-head{padding:56px 24px 28px}
+.sec-head h2{font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1.08}
+.sec-head p{font-size:15px;color:var(--text-sub);margin-top:8px}
+
+/* Product Cards */
+.products{padding:0 16px}
+.p-card{border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px;background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,0.4);opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;cursor:pointer}
+.p-card.visible{opacity:1;transform:translateY(0)}
+.p-card:active{transform:scale(0.985)}
+.p-hero{height:220px;position:relative;display:flex;align-items:flex-end;padding:24px;background-size:cover;background-position:center}
+.p-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,0.65));pointer-events:none}
+.p-badge{position:absolute;top:18px;left:18px;z-index:2;padding:5px 12px;border-radius:980px;font-size:11px;font-weight:600;background:rgba(0,0,0,0.45);backdrop-filter:blur(12px);color:rgba(255,255,255,0.9)}
+.p-price{position:absolute;top:18px;right:18px;z-index:2;padding:6px 14px;border-radius:980px;font-size:14px;font-weight:700;background:var(--accent);color:#000}
+.p-hero-text{position:relative;z-index:2}
+.p-hero h3{font-size:26px;font-weight:700;letter-spacing:-0.6px;color:#fff}
+.p-hero .tagline{font-size:13px;color:rgba(255,255,255,0.65);margin-top:3px}
+.p-body{padding:20px 22px 22px}
+.p-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.spec-chip{padding:5px 11px;background:var(--card2);border-radius:8px;font-size:11px;color:var(--accent2);font-weight:500;letter-spacing:0.3px}
+.p-features{list-style:none}
+.p-features li{font-size:14px;color:var(--text-sub);padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.p-features li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0}
+.p-features li strong{color:var(--text);font-weight:600}
+.swatches{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.sw-item{text-align:center}
+.sw{width:44px;height:44px;border-radius:12px;border:1px solid var(--line2);box-shadow:inset 0 1px 2px rgba(255,255,255,0.06),0 2px 6px rgba(0,0,0,0.3);background-size:cover;background-position:center}
+.sw-name{font-size:10px;color:var(--text-faint);margin-top:6px;letter-spacing:0.5px}
+
+/* Product Detail View */
+.detail-back{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;font-family:inherit;margin:8px 0 0 8px}
+.detail-hero{height:280px;position:relative;display:flex;align-items:flex-end;padding:24px;background-size:cover;background-position:center;margin:0 16px;border-radius:var(--r-lg);overflow:hidden}
+.detail-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,0.7))}
+.detail-hero-text{position:relative;z-index:2}
+.detail-hero h2{font-size:32px;font-weight:700;color:#fff;letter-spacing:-1px}
+.detail-hero .detail-tagline{font-size:14px;color:rgba(255,255,255,0.7);margin-top:4px}
+.detail-price{position:absolute;top:18px;right:18px;z-index:2;padding:6px 14px;border-radius:980px;font-size:14px;font-weight:700;background:var(--accent);color:#000}
+.detail-info{padding:20px 16px}
+.detail-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.detail-features{list-style:none;margin-bottom:8px}
+.detail-features li{font-size:14px;color:var(--text-sub);padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.detail-features li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0}
+.detail-features li strong{color:var(--text);font-weight:600}
+.detail-section-title{font-size:18px;font-weight:700;margin:24px 0 12px;padding-left:16px}
+.detail-photos{padding:0 16px;display:flex;flex-direction:column;gap:12px}
+.detail-photos img{width:100%;border-radius:12px;border:0.5px solid var(--line2);display:block}
+.detail-vr-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:24px 16px;padding:16px;background:var(--accent);color:#000;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none}
+.detail-vr-btn:active{transform:scale(0.97)}
+.detail-vr-btn svg{width:22px;height:22px}
+
+/* Calculator */
+.calc{padding:0 16px}
+.calc-card{background:var(--card);border-radius:var(--r-lg);padding:24px 20px;margin-bottom:16px}
+.calc-label{font-size:13px;font-weight:600;color:var(--text-sub);margin-bottom:10px;display:block}
+.calc-area-input{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.calc-area-input input{
+  flex:1;height:52px;background:var(--card2);border:1px solid var(--line2);
+  border-radius:14px;color:var(--text);font-size:24px;font-weight:700;
+  padding:0 16px;font-family:inherit;outline:none;text-align:center;
+  -webkit-appearance:none;
+}
+.calc-area-input input:focus{border-color:var(--accent)}
+.calc-area-input .unit{font-size:16px;color:var(--text-faint);font-weight:500}
+
+.calc-series{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:20px}
+.calc-series::-webkit-scrollbar{display:none}
+.calc-s-btn{
+  flex-shrink:0;padding:10px 16px;border-radius:12px;
+  background:var(--card2);border:1px solid var(--line2);
+  color:var(--text-sub);font-size:13px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;
+}
+.calc-s-btn .s-price{font-size:11px;color:var(--text-faint);margin-top:2px;font-weight:500}
+.calc-s-btn.active{background:var(--accent);border-color:var(--accent);color:#000}
+.calc-s-btn.active .s-price{color:rgba(0,0,0,0.6)}
+
+.calc-pattern{display:flex;gap:8px;margin-bottom:24px}
+.calc-p-btn{
+  flex:1;padding:12px;border-radius:12px;
+  background:var(--card2);border:1px solid var(--line2);
+  color:var(--text-sub);font-size:13px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;
+}
+.calc-p-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent2)}
+.calc-p-btn .p-rate{font-size:11px;color:var(--text-faint);margin-top:2px}
+.calc-p-btn.active .p-rate{color:var(--accent)}
+
+.calc-result{background:var(--card2);border-radius:16px;padding:20px;border:1px solid var(--line2)}
+.calc-r-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+.calc-r-label{font-size:14px;color:var(--text-sub)}
+.calc-r-value{font-size:15px;font-weight:600;color:var(--text)}
+.calc-r-divider{height:1px;background:var(--line2);margin:8px 0}
+.calc-r-total{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+.calc-r-total .calc-r-label{font-size:16px;font-weight:700;color:var(--text)}
+.calc-r-total .calc-r-value{font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-1px}
+.calc-note{font-size:12px;color:var(--text-faint);margin-top:14px;line-height:1.5;text-align:center}
+
+/* Guide */
+.guide{padding:0 16px}
+.g-card{background:var(--card);border-radius:var(--r);padding:22px;margin-bottom:10px}
+.g-card h4{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.g-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#000;font-size:12px;font-weight:700;flex-shrink:0}
+.g-card ul{list-style:none;font-size:14px;color:var(--text-sub);line-height:1.8}
+.g-card li{padding:3px 0;display:flex;gap:6px}
+.g-card li::before{content:"·";color:var(--accent);font-weight:700;flex-shrink:0}
+.g-tip{margin-top:14px;padding:12px 14px;background:var(--accent-dim);border-radius:10px;font-size:13px;color:var(--accent2);line-height:1.5;border-left:2px solid var(--accent)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.tc-card{background:var(--card);border-radius:var(--r);padding:20px 16px}
+.tc-card h4{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.tc-card ul{list-style:none;font-size:12px;color:var(--text-sub);line-height:1.65}
+.tc-card li{padding:3px 0;display:flex;gap:4px}
+.tc-card li::before{content:"›";color:var(--accent);font-weight:700;flex-shrink:0}
+.timeline{padding:0 20px}
+.tl-item{display:flex;gap:14px;padding-bottom:20px;position:relative}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:15px;top:36px;bottom:0;width:2px;background:var(--line2)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:32px;height:32px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;border:1.5px solid var(--accent);font-size:13px;font-weight:600;color:var(--accent)}
+.tl-content{flex:1;padding-top:5px}
+.tl-content h4{font-size:15px;font-weight:700;margin-bottom:3px}
+.tl-content p{font-size:13px;color:var(--text-sub);line-height:1.55}
+.faq-list{padding:0 16px}
+.faq-item{background:var(--card);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.faq-q{padding:17px 20px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq-q .arrow{font-size:13px;color:var(--text-faint);transition:transform .3s}
+.faq-item.open .arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-item.open .faq-a{max-height:320px}
+.faq-a-inner{padding:0 20px 18px;font-size:14px;color:var(--text-sub);line-height:1.7}
+.q-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:flex-end}
+.q-modal.show{display:flex}
+.q-content{background:#0a0a0c;border-radius:20px 20px 0 0;width:100%;max-height:80vh;overflow-y:auto;padding:12px 20px 40px;animation:slideUp .35s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.q-handle{width:36px;height:5px;border-radius:3px;background:var(--line2);margin:0 auto 18px}
+.q-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:18px}
+.q-table{width:100%;border-collapse:collapse;font-size:12px}
+.q-table th{background:var(--card2);color:var(--text);padding:10px 5px;text-align:center;font-weight:600;font-size:11px;position:sticky;top:0}
+.q-table td{padding:10px 5px;text-align:center;border-bottom:0.5px solid var(--line);font-size:12px;color:var(--text-sub)}
+.q-table td:first-child{color:var(--accent2);font-weight:600}
+.q-close{display:block;margin:22px auto 0;padding:10px 50px;background:var(--accent);color:#000;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+
+/* VR Preview */
+.vr-section{padding:0 16px}
+.vr-preview{display:block;text-decoration:none;color:inherit;border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px;background:var(--card);border:0.5px solid var(--line2);transition:transform .2s}
+.vr-preview:active{transform:scale(0.98)}
+.vr-cover{height:200px;position:relative;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
+.vr-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.6))}
+.vr-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,0.3);z-index:2;transition:transform .3s}
+.vr-preview:active .vr-play{transform:scale(1.1)}
+.vr-play svg{width:28px;height:28px;fill:#fff;margin-left:3px}
+.vr-cover .vr-tag{position:absolute;top:16px;left:16px;z-index:2;padding:4px 10px;border-radius:980px;font-size:11px;font-weight:600;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);color:#fff}
+.vr-cover .vr-label{position:absolute;bottom:18px;left:20px;z-index:2;font-size:15px;font-weight:600;color:#fff}
+.vr-info{padding:16px 20px}
+.vr-info h4{font-size:17px;font-weight:600;color:var(--text)}
+.vr-info p{font-size:13px;color:var(--text-faint);margin-top:4px}
+.vr-enter{margin-top:12px;display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:var(--accent)}
+
+/* Report */
+.report{padding:0 16px}
+.r-card{background:var(--card);border-radius:var(--r);padding:4px 22px}
+.r-row{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:0.5px solid var(--line)}
+.r-row:last-child{border-bottom:none}
+.r-label{font-size:14px;color:var(--text-sub)}
+.r-value{font-size:15px;font-weight:600}
+.r-pass{color:var(--green)}
+
+/* Footer */
+.footer{text-align:center;padding:56px 24px 40px}
+.footer .f-line{font-size:13px;color:var(--text-faint);line-height:1.9}
+.footer .f-contact{margin-top:16px;font-size:14px;color:var(--text-sub)}
+.footer .f-note{margin-top:24px;font-size:11px;color:var(--text-faint);letter-spacing:1px}
+
+/* FAB */
+.fab{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-top:0.5px solid var(--line2);display:flex;padding:8px 16px;gap:8px;z-index:999;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+.fab-btn{flex:1;height:44px;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;transition:transform .15s}
+.fab-btn:active{transform:scale(0.95)}
+.fab-call{background:var(--accent);color:#000}
+.fab-calc{background:var(--card2);color:var(--text)}
+.fab-btn svg{width:18px;height:18px}
+
+@media(min-width:600px){.hero h1{font-size:64px}.sec-head h2{font-size:40px}}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="nav-scroll">
+    <button class="nav-item active" data-section="products">产品</button>
+    <button class="nav-item" data-section="calc">计价</button>
+    <button class="nav-item" data-section="measure">量房</button>
+    <button class="nav-item" data-section="script">话术</button>
+    <button class="nav-item" data-section="order">跟单</button>
+    <button class="nav-item" data-section="faq">问答</button>
+    <button class="nav-item" data-section="vr">全景</button>
+    <button class="nav-item" data-section="report">质检</button>
+  </div>
+</nav>
+<button class="quick-btn" id="quickBtn" style="position:fixed;top:6px;right:12px;height:32px;padding:0 14px;background:var(--accent-dim);color:var(--accent);border:0.5px solid rgba(201,164,122,0.25);border-radius:980px;font-size:12px;font-weight:600;cursor:pointer;z-index:1001;font-family:inherit">速查</button>
+
+<div class="page-wrap">
+
+  <!-- PRODUCTS -->
+  <section class="section active" id="products">
+    <div class="hero w-hero">
+      <div class="hero-glow"></div>
+      <div class="brand">DER 德尔地板</div>
+      <h1>天工所赐<br>自然版权</h1>
+      <p class="sub">五大系列 · ENF级环保 · 瑞士原创设计</p>
+      <div class="meta">
+        <div class="meta-item"><div class="meta-num">5</div><div class="meta-label">大系列</div></div>
+        <div class="meta-item"><div class="meta-num">¥88</div><div class="meta-label">起 / 平</div></div>
+        <div class="meta-item"><div class="meta-num">2年</div><div class="meta-label">保修</div></div>
+      </div>
+      <div class="scroll-hint">下滑探索 ↓</div>
+    </div>
+
+    <div class="sec-head"><h2>五大系列</h2><p>从88到280元/平，总有一款适合您</p></div>
+
+    <div class="products">
+      <div class="p-card" data-product="tiangong">
+        <div class="p-hero" style="background-image:url('images/tiangong-all.jpg')">
+          <span class="p-badge">主推</span><span class="p-price">¥188/平</span>
+          <div class="p-hero-text"><h3>天工印记</h3><p class="tagline">1620mm大板 · 瑞士原创 · 同步纹</p></div>
+        </div>
+        <div class="p-body">
+          <div class="p-specs"><span class="spec-chip">1620×235×14mm</span><span class="spec-chip">三层整芯</span><span class="spec-chip">同步纹</span><span class="spec-chip">ENF级</span><span class="spec-chip">十纬防护</span></div>
+          <ul class="p-features">
+            <li><strong>1620mm超大板幅</strong>，整版直铺，大气天成</li>
+            <li><strong>瑞士CDDESIGN原创设计</strong>，独家版权</li>
+            <li><strong>原生同步叠纹</strong>，可触摸的真实凹凸肌理</li>
+            <li><strong>2.4米超大版辊</strong>，纹理不重复</li>
+            <li><strong>智盾十纬防护</strong>：抗污/地暖/耐酸碱/耐磨/耐刮等</li>
+            <li><strong>一色多形</strong>：条形、人字拼、鱼骨拼可选</li>
+          </ul>
+          <div class="swatches">
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#d4b896,#c9a47a)"></div><div class="sw-name">云栖痕</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#c9a47a,#b8915c)"></div><div class="sw-name">泽曦木</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#7a5c42,#5a4332)"></div><div class="sw-name">松影迹</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#8a7a6a,#6a5a4a)"></div><div class="sw-name">玄穹脉</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#b89878,#a08868)"></div><div class="sw-name">辰年漪</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#5a4636,#3a2e22)"></div><div class="sw-name">风栾织</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-product="modern">
+        <div class="p-hero" style="background-image:url('images/modern-mili.png')">
+          <span class="p-badge">实木复合</span><span class="p-price">¥228/平</span>
+          <div class="p-hero-text"><h3>摩登系列</h3><p class="tagline">Mid CM · 三层木芯 · 拉丝工艺</p></div>
+        </div>
+        <div class="p-body">
+          <div class="p-specs"><span class="spec-chip">1638×197×14mm</span><span class="spec-chip">三层木芯</span><span class="spec-chip">锁扣</span><span class="spec-chip">拉丝面</span><span class="spec-chip">ENF级</span></div>
+          <ul class="p-features">
+            <li><strong>三层木芯结构</strong>，抗变形性能强</li>
+            <li><strong>锁扣安装</strong>，免胶免钉，施工快</li>
+            <li><strong>拉丝表面工艺</strong>，质感立体，触感真实</li>
+            <li><strong>三色可选</strong>：蜜栎（暖棕）/ 雾境（浅灰）/ 焙痕（深棕）</li>
+          </ul>
+          <div class="swatches">
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#c9a26d,#b8915c)"></div><div class="sw-name">蜜栎</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#b8b8be,#9a9aa0)"></div><div class="sw-name">雾境</div></div>
+            <div class="sw-item"><div class="sw" style="background:linear-gradient(135deg,#6b4e3a,#4a3828)"></div><div class="sw-name">焙痕</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card">
+        <div class="p-hero w-dark">
+          <span class="p-badge">旗舰</span><span class="p-price">¥280/平</span>
+          <div class="p-hero-text"><h3>卓羡系列</h3><p class="tagline">三层实木复合 · 15mm厚</p></div>
+        </div>
+        <div class="p-body">
+          <div class="p-specs"><span class="spec-chip">1220×197×15mm</span><span class="spec-chip">三层实木</span><span class="spec-chip">15mm</span></div>
+          <ul class="p-features">
+            <li><strong>三层实木复合</strong>，面皮更厚，质感更佳</li>
+            <li><strong>15mm厚度</strong>，脚感扎实，隔音好</li>
+            <li>适合别墅、大平层、追求品质的家庭</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="p-card">
+        <div class="p-hero w-grey">
+          <span class="p-badge">高性价比</span><span class="p-price">¥88/平</span>
+          <div class="p-hero-text"><h3>德尔复合板</h3><p class="tagline">强化复合 · 极致性价比</p></div>
+        </div>
+        <div class="p-body">
+          <div class="p-specs"><span class="spec-chip">1220×240×10mm</span><span class="spec-chip">强化复合</span><span class="spec-chip">10mm</span></div>
+          <ul class="p-features">
+            <li><strong>88元/平</strong>，经济实惠</li>
+            <li>10mm厚度，轻薄好铺，施工快</li>
+            <li>适合出租房翻新、工装项目、预算有限</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="p-card">
+        <div class="p-hero w-natural">
+          <span class="p-badge">纯实木</span><span class="p-price">¥230起</span>
+          <div class="p-hero-text"><h3>实木地板</h3><p class="tagline">龙凤檀 / 橡木 · 含龙骨安装</p></div>
+        </div>
+        <div class="p-body">
+          <div class="p-specs"><span class="spec-chip">910×122mm</span><span class="spec-chip">纯实木</span><span class="spec-chip">含龙骨</span></div>
+          <ul class="p-features">
+            <li><strong>龙凤檀</strong>：230元/平 + 45元/平安装费</li>
+            <li><strong>橡木</strong>：268元/平 + 45元/平安装费</li>
+            <li>安装含9厘夹板龙骨，总厚度2.8-3.0公分</li>
+            <li>纯实木脚感，天然木香</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT DETAIL -->
+  <section class="section" id="product-detail">
+    <button class="detail-back" onclick="switchTab('products')">‹ 返回产品列表</button>
+    <div id="detailContent"></div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="section" id="calc">
+    <div class="sec-head"><h2>快速计价</h2><p>输入面积，选系列和铺法，一键估算</p></div>
+    <div class="calc">
+      <div class="calc-card">
+        <label class="calc-label">铺设面积</label>
+        <div class="calc-area-input">
+          <input type="number" id="calcArea" value="30" min="1" max="9999" inputmode="decimal">
+          <span class="unit">平方米</span>
+        </div>
+
+        <label class="calc-label">选择系列</label>
+        <div class="calc-series" id="calcSeries">
+          <button class="calc-s-btn active" data-name="德尔复合板" data-price="88" data-install="0" data-solid="0">德尔复合板<span class="s-price">¥88/平</span></button>
+          <button class="calc-s-btn" data-name="天工印记" data-price="188" data-install="0" data-solid="0">天工印记<span class="s-price">¥188/平</span></button>
+          <button class="calc-s-btn" data-name="摩登系列" data-price="228" data-install="0" data-solid="0">摩登系列<span class="s-price">¥228/平</span></button>
+          <button class="calc-s-btn" data-name="龙凤檀" data-price="230" data-install="45" data-solid="1">龙凤檀<span class="s-price">¥230+45</span></button>
+          <button class="calc-s-btn" data-name="橡木" data-price="268" data-install="45" data-solid="1">橡木<span class="s-price">¥268+45</span></button>
+          <button class="calc-s-btn" data-name="卓羡系列" data-price="280" data-install="0" data-solid="0">卓羡系列<span class="s-price">¥280/平</span></button>
+        </div>
+
+        <label class="calc-label">铺设方式</label>
+        <div class="calc-pattern" id="calcPattern">
+          <button class="calc-p-btn active" data-rate="0.06">常规直铺<span class="p-rate">损耗6%</span></button>
+          <button class="calc-p-btn" data-rate="0.14">人字拼<span class="p-rate">损耗14%</span></button>
+          <button class="calc-p-btn" data-rate="0.18">鱼骨拼<span class="p-rate">损耗18%</span></button>
+        </div>
+
+        <div class="calc-result" id="calcResult">
+          <div class="calc-r-row"><span class="calc-r-label">地板用量</span><span class="calc-r-value" id="rQty">31.8 平</span></div>
+          <div class="calc-r-row"><span class="calc-r-label">地板费</span><span class="calc-r-value" id="rFloor">¥2,798</span></div>
+          <div class="calc-r-row"><span class="calc-r-label">安装费</span><span class="calc-r-value" id="rInstall">¥0</span></div>
+          <div class="calc-r-row" id="rLaborRow" style="display:none"><span class="calc-r-label">工钱（不足30平）</span><span class="calc-r-value" id="rLabor">¥350</span></div>
+          <div class="calc-r-divider"></div>
+          <div class="calc-r-total"><span class="calc-r-label">预估总价</span><span class="calc-r-value" id="rTotal">¥2,798</span></div>
+        </div>
+        <p class="calc-note">辅料（踢脚线、收边条、防潮膜）另算 · 30平以上免工钱 · 实际以量房报价为准</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEASURE -->
+  <section class="section" id="measure">
+    <div class="sec-head"><h2>量房指南</h2><p>量得准，才能报得对</p></div>
+    <div class="guide">
+      <div class="g-card"><h4><span class="g-num">1</span>必备工具</h4><ul><li>激光测距仪（5-50m量程）</li><li>5米钢卷尺（量门窗、阴阳角）</li><li>记号笔 + 量房记录表</li><li>水平尺或手机水平仪APP</li><li>手机相机（全程拍照留底）</li></ul></div>
+      <div class="g-card"><h4><span class="g-num">2</span>标准矩形房间</h4><ul><li>量最长边 × 最宽边 = 基础面积</li><li>量门洞宽度（门洞处要裁切）</li><li>量窗台高度（窗下不铺或铺到窗台）</li><li>记录层高（判断是否要找平）</li></ul><div class="g-tip">报价面积 = 使用面积 ×（1 + 损耗率）</div></div>
+      <div class="g-card"><h4><span class="g-num">3</span>L形 / 异形房间</h4><ul><li>L形拆成两个矩形分别量</li><li>面积 = 矩形A + 矩形B</li><li>异形区域按最大矩形估算</li><li>过道单独量，按实际面积算</li></ul><div class="g-tip">异形越多损耗越大，报价时损耗率适当上调</div></div>
+      <div class="g-card"><h4><span class="g-num">4</span>损耗率参考</h4><ul><li><strong>常规直铺：</strong>5-8%</li><li><strong>人字拼：</strong>12-15%</li><li><strong>鱼骨拼：</strong>15-20%</li><li><strong>异形多：</strong>额外+3-5%</li></ul><div class="g-tip">30平以下单补350元工钱，报价别忘了加！</div></div>
+      <div class="g-card"><h4><span class="g-num">5</span>现场必拍清单</h4><ul><li>全屋地面全景（四角各一张）</li><li>门框底部（看预留地板高度）</li><li>阴阳角（看是否方正）</li><li>地面平整度（靠尺照片）</li><li>地暖分水器位置（如有）</li><li>踢脚线现状（是否拆除更换）</li><li>厨卫门口过渡区（过门条处理）</li></ul><div class="g-tip">拍照是后期扯皮的证据，也是报价依据</div></div>
+      <div class="g-card"><h4><span class="g-num">6</span>快速报价公式</h4><ul><li><strong>地板费：</strong>面积 ×（1+损耗率）× 单价</li><li><strong>安装费：</strong>面积 × 安装费单价</li><li><strong>辅料费：</strong>踢脚线 + 收边条 + 防潮膜 + 过门条</li><li><strong>工钱：</strong>＜30平补350元</li><li><strong>总价：</strong>地板 + 安装 + 辅料 + 工钱</li></ul><div class="g-tip">辅料是利润点！踢脚线、收边条单独报价，别打包送</div></div>
+    </div>
+  </section>
+
+  <!-- SCRIPT -->
+  <section class="section" id="script">
+    <div class="sec-head"><h2>销售话术</h2><p>见什么人说什么话</p></div>
+    <div class="two-col">
+      <div class="tc-card"><h4>家装业主</h4><ul><li>讲环保：ENF级，甲醛0.016，母婴可用</li><li>讲颜值：6花色+VR全景，手机看效果</li><li>讲品质：上海质检院报告，耐磨2000转</li><li>讲省心：保修2年，买贵退差价</li><li>讲设计：瑞士原创，同步纹可触摸</li><li>推中高端：天工188 / 摩登228 / 卓羡280</li></ul></div>
+      <div class="tc-card"><h4>工程老板</h4><ul><li>讲出货快：现货充足，量大可调</li><li>讲量价：量越大越优，长期更优惠</li><li>讲稳定：德尔大品牌，品控不掉链</li><li>讲省事：送货上门，安装一条龙</li><li>讲售后：不扯皮，有问题直接对接</li><li>走量款：复合板88 / 天工印记188</li></ul></div>
+    </div>
+    <div class="sec-head" style="padding-top:36px"><h2>推销策略</h2></div>
+    <div class="guide">
+      <div class="g-card"><h4>预算不明的客户</h4><ul><li>先问面积和房间数，判断全屋还是局部</li><li>再问风格偏好（原木/轻奢/侘寂/美式）</li><li>报区间："88到280都有，看您预算"</li><li>说便宜→推88或188</li><li>说好一点→推228或280</li></ul></div>
+      <div class="g-card"><h4>犹豫不决的客户</h4><ul><li>拿出VR全景让他自己转着看</li><li>拿两块样板放地上让他踩、摸</li><li>说"保修2年，买贵退差价"消除顾虑</li><li>制造紧迫感："团购价名额有限"</li></ul></div>
+      <div class="g-card"><h4>嫌贵的客户</h4><ul><li>算总账："一平差40，30平差1200，用10年每天差3毛"</li><li>讲环保差距："ENF和E0差几倍，有小孩别省这个"</li><li>降档推荐："看天工188的，一样大板质感"</li><li>别硬推高端，客户跑了啥都没有</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="section" id="order">
+    <div class="sec-head"><h2>跟单流程</h2><p>从量房到收款，八步闭环</p></div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot">1</div><div class="tl-content"><h4>量房</h4><p>上门量尺寸，拍照留底，记录客户需求和房间情况。当天整理好量房数据。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">2</div><div class="tl-content"><h4>报价</h4><p>24小时内出报价单。写清：系列、花色、规格、面积、损耗、单价、辅料、安装费、总价。微信发图片。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">3</div><div class="tl-content"><h4>签单</h4><p>确认花色、规格、数量、总价、工期。收定金30-50%。合同写明保修2年、买贵退差价。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">4</div><div class="tl-content"><h4>下单</h4><p>跟仓库确认库存，缺货确认到货时间。下单核对型号规格，避免发错。预留3-5天到货缓冲。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">5</div><div class="tl-content"><h4>送货</h4><p>提前1天通知客户收货。到场核对数量、花色、规格。检查包装有无破损。签收货单。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">6</div><div class="tl-content"><h4>安装</h4><p>安排师傅上门。安装前再验地面平整度。安装中到场看一次，检查拼缝、收边。安装完清场。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">7</div><div class="tl-content"><h4>验收</h4><p>和客户一起走一遍，看拼缝、听有无响声、查收边条。客户确认签字。拍完工照存档。</p></div></div>
+      <div class="tl-item"><div class="tl-dot">8</div><div class="tl-content"><h4>收款</h4><p>收尾款。开发票/收据。加客户微信告知保修。留转介绍话术："用得好帮推荐朋友"。</p></div></div>
+    </div>
+    <div class="guide" style="margin-top:20px"><div class="g-card"><h4>跟单雷区</h4><ul><li>报价不写辅料明细→后期加钱客户翻脸</li><li>没拍量房照→安装时地面不平扯皮</li><li>不收定金就下单→客户反悔货压手里</li><li>合同没写工期→客户催到崩溃</li><li>安装完不验收直接走→出问题说不清</li></ul></div></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="sec-head"><h2>客户必问</h2><p>背下来，对答如流</p></div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">甲醛高不高？家里有小孩 <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">ENF级，国标最高环保等级，甲醛实测0.016mg/m³，远低于标准0.025。母婴级健康呵护，上海质检院报告，编号W02610220105，可现场给您看。</div></div></div>
+      <div class="faq-item"><div class="faq-q">能不能铺地暖？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">天工印记和摩登系列都适用地暖。智盾防护系统地暖环境不易开裂起拱。注意：纯实木地板不建议铺地暖，容易变形。选三层实木复合或强化复合更稳。</div></div></div>
+      <div class="faq-item"><div class="faq-q">耐磨怎么样？能用几年？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">表面耐磨≥2000转，耐磨Ⅲ级，家用绰绰有余。正常使用8-10年没问题。保修2年，期间有质量问题包修。</div></div></div>
+      <div class="faq-item"><div class="faq-q">跟其他品牌比怎么样？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">德尔是地板行业头部品牌，上市公司德尔未来旗下。ENF级环保、瑞士原创设计、上海质检院检测。同价位比环保、同环保比设计、同设计比价格，咱家综合最优。</div></div></div>
+      <div class="faq-item"><div class="faq-q">能不能再便宜点？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">这是专属团购价，已比零售低不少。保修2年，买贵包退差价。量大的话可以再申请，您先说大概多少平？</div></div></div>
+      <div class="faq-item"><div class="faq-q">安装费怎么算？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">30平以上免工钱。30平以下补350元工钱。实木地板安装费另算，45元/平，含9厘夹板龙骨，总厚度2.8-3.0公分。辅料另算，现场报明细。</div></div></div>
+      <div class="faq-item"><div class="faq-q">保修多久？出问题怎么办？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">保修2年，买贵包退差价。安装完签字验收起算保修期。有问题直接微信联系，上门查看处理，不扯皮。</div></div></div>
+      <div class="faq-item"><div class="faq-q">天工印记和摩登有什么区别？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">天工印记1620大板幅、同步纹、瑞士原创、2.4米版辊纹理不重复、十纬防护，卖点更多，188元/平性价比高。摩登1638板幅、三层木芯、拉丝工艺，228元/平。预算够选摩登，要大板选天工。</div></div></div>
+      <div class="faq-item"><div class="faq-q">可以看铺装效果吗？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">有VR全景展示，手机直接360度看真实铺装效果。天工印记和摩登Mid CM系列都有全景，切到"全景"标签页即可查看。</div></div></div>
+      <div class="faq-item"><div class="faq-q">多久能送货安装？ <span class="arrow">⌄</span></div><div class="faq-a"><div class="faq-a-inner">现货款下单后3-5天到货，到货后约师傅1-2天内上门安装。缺货款确认到货时间后告知。着急的话先确认库存。</div></div></div>
+    </div>
+  </section>
+
+  <!-- VR -->
+  <section class="section" id="vr">
+    <div class="sec-head"><h2>全景展示</h2><p>手机360°看铺装效果</p></div>
+    <div class="vr-section">
+      <a class="vr-preview" href="javascript:void(0)" onclick="var u='https://www.720yun.com/vr/fa1jt7mvtv2';var w=window.open(u,'_blank');if(!w){window.location.href=u;}return false;">
+        <div class="vr-cover" style="background-image:url('images/tiangong-all.jpg');background-size:cover;background-position:center"><span class="vr-tag">VR 全景</span><div class="vr-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="vr-label">天工印记系列</span></div>
+        <div class="vr-info"><h4>天工印记系列</h4><p>辰年漪 · 风栾织 · 松影迹 · 玄穹脉 · 云栖痕 · 泽曦木</p><span class="vr-enter">点击进入全景 ›</span></div>
+      </a>
+      <a class="vr-preview" href="javascript:void(0)" onclick="var u='https://www.720yun.com/vr/989jt7mv5O8';var w=window.open(u,'_blank');if(!w){window.location.href=u;}return false;">
+        <div class="vr-cover" style="background-image:url('images/modern-mili.png');background-size:cover;background-position:center"><span class="vr-tag">VR 全景</span><div class="vr-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="vr-label">Mid CM 摩登系列</span></div>
+        <div class="vr-info"><h4>Mid CM 摩登系列</h4><p>蜜栎花色全景展示</p><span class="vr-enter">点击进入全景 ›</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="section" id="report">
+    <div class="sec-head"><h2>质检报告</h2><p>上海市质量监督检验技术研究院 · 报告编号 W02610220105</p></div>
+    <div class="report">
+      <div class="r-card">
+        <div class="r-row"><span class="r-label">甲醛释放量</span><span class="r-value r-pass">0.016 mg/m³ <span style="font-size:11px;color:var(--text-faint)">ENF≤0.025</span></span></div>
+        <div class="r-row"><span class="r-label">表面耐磨</span><span class="r-value r-pass">≥2000转 · 耐磨Ⅲ级</span></div>
+        <div class="r-row"><span class="r-label">含水率</span><span class="r-value r-pass">8.2% <span style="font-size:11px;color:var(--text-faint)">标准6.0-14.0</span></span></div>
+        <div class="r-row"><span class="r-label">浸渍剥离</span><span class="r-value r-pass">无分层 · 6/6合格</span></div>
+        <div class="r-row"><span class="r-label">检测日期</span><span class="r-value" style="font-size:13px">2026.03.20 – 04.27</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p class="f-line">德尔地板 · 专属团购渠道</p>
+    <p class="f-line">保修2年 · 买贵退差价 · ENF级环保</p>
+    <div class="f-contact">
+      <p>泰源建材装饰广场 · 一楼C51档</p>
+      <p>南山区南头街道南山大道3001号</p>
+      <p style="margin-top:10px">融家广场建材馆 · 德尔地板</p>
+      <p>南山区粤海街道后海大道2714号</p>
+      <p style="margin-top:14px;font-size:16px;color:var(--accent2);font-weight:600">
+        <a href="tel:13265767317" style="color:inherit;text-decoration:none">132 6576 7317</a>
+        &nbsp;/&nbsp;
+        <a href="tel:13602630251" style="color:inherit;text-decoration:none">136 0263 0251</a>
+      </p>
+    </div>
+    <p class="f-note">DER FLOORING</p>
+  </div>
+</div>
+
+<div class="fab">
+  <button class="fab-btn fab-calc" onclick="switchTab('calc')" style="background:var(--accent);color:#000">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2zm0 6v3h10V8H7zm0 5v2h2v-2H7zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm-6 3v2h2v-2H7zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm-6 3v2h2v-2H7zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/></svg>
+    计价器
+  </button>
+</div>
+
+<!-- Quick Reference Modal -->
+<div class="q-modal" id="quickModal">
+  <div class="q-content">
+    <div class="q-handle"></div>
+    <div class="q-title">五系列速查</div>
+    <table class="q-table">
+      <thead><tr><th>系列</th><th>类型</th><th>规格mm</th><th>元/平</th><th>安装</th><th>定位</th></tr></thead>
+      <tbody>
+        <tr><td>德尔复合</td><td>强化</td><td>1220×240×10</td><td>88</td><td>30平+免</td><td>引流</td></tr>
+        <tr><td>天工印记</td><td>实木复合</td><td>1620×235×14</td><td>188</td><td>30平+免</td><td>主推</td></tr>
+        <tr><td>摩登系列</td><td>实木复合</td><td>1638×197×14</td><td>228</td><td>30平+免</td><td>中高端</td></tr>
+        <tr><td>实木·龙凤檀</td><td>纯实木</td><td>910×122</td><td>230</td><td>+45/平</td><td>实木</td></tr>
+        <tr><td>实木·橡木</td><td>纯实木</td><td>910×122</td><td>268</td><td>+45/平</td><td>实木</td></tr>
+        <tr><td>卓羡系列</td><td>三层实木</td><td>1220×197×15</td><td>280</td><td>30平+免</td><td>旗舰</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text-faint);text-align:center;margin-top:12px">30平以下补350元工钱 · 保修2年 · 买贵退差</p>
+    <button class="q-close" onclick="closeQuick()">关闭</button>
+  </div>
+</div>
+
+<script>
+function switchTab(name){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector('.nav-item[data-section="'+name+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(observeCards,100);
+}
+document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>switchTab(item.dataset.section)));
+
+// Product data for detail view
+const productData={
+  tiangong:{
+    name:'天工印记',price:'¥188/平',tagline:'1620mm大板 · 瑞士原创 · 同步纹',
+    hero:'images/tiangong-all.jpg',
+    specs:['1620×235×14mm','三层整芯','同步纹','ENF级','十纬防护'],
+    features:['1620mm超大板幅，整版直铺，大气天成','瑞士CDDESIGN原创设计，独家版权','原生同步叠纹，可触摸的真实凹凸肌理','2.4米超大版辊，纹理不重复','智盾十纬防护：抗污/地暖/耐酸碱/耐磨/耐刮等','一色多形：条形、人字拼、鱼骨拼可选'],
+    photos:['images/tiangong-all.jpg','images/tg-6colors-hcard.jpg','images/tg-songyingji-specs.jpg','images/tg-songyingji-poster.jpg','images/tg-yunhenxi-hero.jpg','images/tg-songyingji-room.jpg','images/tg-songyingji-detailpage.jpg','images/tg-yunhenxi-detailpage.jpg'],
+    vrUrl:'https://www.720yun.com/vr/fa1jt7mvtv2',vrLabel:'天工印记系列 VR 全景'
+  },
+  modern:{
+    name:'摩登系列',price:'¥228/平',tagline:'Mid CM · 三层木芯 · 拉丝工艺',
+    hero:'images/modern-mili.png',
+    specs:['1638×197×14mm','三层木芯','锁扣','拉丝面','ENF级'],
+    features:['三层木芯结构，抗变形性能强','锁扣安装，免胶免钉，施工快','拉丝表面工艺，质感立体，触感真实','三色可选：蜜栎（暖棕）/ 雾境（浅灰）/ 焙痕（深棕）'],
+    photos:['images/modern-mili.png','images/modern-wujing.png','images/modern-beihen.png','images/md-mili-hero.jpg','images/md-wujing-hero.jpg','images/md-beihen-hero.jpg','images/md-modern-detailpage.jpg'],
+    vrUrl:'https://www.720yun.com/vr/989jt7mv5O8',vrLabel:'摩登系列 VR 全景'
+  }
+};
+
+function showDetail(key){
+  const p=productData[key];
+  if(!p)return;
+  let html='<div class="detail-hero" style="background-image:url(\''+p.hero+'\')">';
+  html+='<span class="detail-price">'+p.price+'</span>';
+  html+='<div class="detail-hero-text"><h2>'+p.name+'</h2><p class="detail-tagline">'+p.tagline+'</p></div></div>';
+  html+='<div class="detail-info"><div class="detail-specs">';
+  p.specs.forEach(s=>html+='<span class="spec-chip">'+s+'</span>');
+  html+='</div><ul class="detail-features">';
+  p.features.forEach(f=>html+='<li><strong>'+f.split('，')[0]+'</strong>，'+f.split('，').slice(1).join('，')+'</li>');
+  html+='</ul></div>';
+  html+='<div class="detail-section-title">实拍图</div>';
+  html+='<div class="detail-photos">';
+  p.photos.forEach(src=>html+='<img src="'+src+'" loading="lazy" alt="'+p.name+'">');
+  html+='</div>';
+  if(p.vrUrl){
+    html+='<a class="detail-vr-btn" href="javascript:void(0)" data-vr="'+p.vrUrl+'">';
+    html+='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'+p.vrLabel+'</a>';
+  }
+  document.getElementById('detailContent').innerHTML=html;
+  var vrBtn=document.querySelector('#detailContent .detail-vr-btn');
+  if(vrBtn)vrBtn.addEventListener('click',function(){var u=this.dataset.vr;var w=window.open(u,'_blank');if(!w){window.location.href=u;}});
+  switchTab('product-detail');
+}
+
+// Card click → detail view
+document.querySelectorAll('.p-card[data-product]').forEach(card=>{
+  card.addEventListener('click',e=>{
+    if(e.target.tagName==='A'||e.target.closest('a'))return;
+    showDetail(card.dataset.product);
+  });
+});
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+
+// Quick modal
+const quickModal=document.getElementById('quickModal');
+document.getElementById('quickBtn').addEventListener('click',()=>quickModal.classList.add('show'));
+function closeQuick(){quickModal.classList.remove('show')}
+quickModal.addEventListener('click',e=>{if(e.target===quickModal)closeQuick()});
+
+// Scroll reveal
+function observeCards(){
+  document.querySelectorAll('.section.active .p-card').forEach((c,i)=>{
+    if(!c.classList.contains('visible'))setTimeout(()=>c.classList.add('visible'),i*120);
+  });
+}
+observeCards();
+
+// Calculator
+let calcState={area:30,price:88,install:0,solid:0,rate:0.06};
+function updateCalc(){
+  const a=calcState.area||0;
+  const qty=a*(1+calcState.rate);
+  const floor=qty*calcState.price;
+  const install=a*calcState.install;
+  const labor=(!calcState.solid&&a<30&&a>0)?350:0;
+  const total=floor+install+labor;
+  document.getElementById('rQty').textContent=qty.toFixed(1)+' 平';
+  document.getElementById('rFloor').textContent='¥'+Math.round(floor).toLocaleString();
+  document.getElementById('rInstall').textContent=install>0?'¥'+Math.round(install).toLocaleString():calcState.solid?'¥'+Math.round(install).toLocaleString():'¥0（30平以上免）';
+  document.getElementById('rLaborRow').style.display=labor>0?'flex':'none';
+  document.getElementById('rLabor').textContent='¥'+labor;
+  document.getElementById('rTotal').textContent='¥'+Math.round(total).toLocaleString();
+}
+document.getElementById('calcArea').addEventListener('input',e=>{calcState.area=parseFloat(e.target.value)||0;updateCalc()});
+document.querySelectorAll('#calcSeries .calc-s-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#calcSeries .calc-s-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    calcState.price=parseInt(btn.dataset.price);
+    calcState.install=parseInt(btn.dataset.install);
+    calcState.solid=parseInt(btn.dataset.solid);
+    updateCalc();
+  });
+});
+document.querySelectorAll('#calcPattern .calc-p-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#calcPattern .calc-p-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    calcState.rate=parseFloat(btn.dataset.rate);
+    updateCalc();
+  });
+});
+updateCalc();
+</script>
+</body>
+</html>
